@@ -1,12 +1,31 @@
-node {
-	stage('Build') {
-		echo "Build"
+//SCRIPTED
+
+//DECLARATIVE
+pipeline {
+	agent any
+	environment {
+		dockerHome = tool 'myDocker'
+		mavenHome = tool 'myMaven'
+		PATH = "$dockerHome/bin:$dockerHome/bin:$PATH"
 	}
-	stage('Test') {
-		echo "Test"
-	}
-	
-	stage('Integration Test') {
-		echo "Integration Test"
+	stages {
+		stage ('Build') {
+		steps {
+			sh 'mvn --version'
+			sh 'docker --version'
+			echo "Build"
+			echo "PATH - $PATH"
+			echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+			echo "JOB_NAME - $env.JOB_NAME"
+			echo "BUILD_TAG - $env.BUILD_TAG"
+
+
+		}
+		}
+		stage('Test') {
+			steps {
+				echo "TEST COMPLETED"
+			}
+		}
 	}
 }
