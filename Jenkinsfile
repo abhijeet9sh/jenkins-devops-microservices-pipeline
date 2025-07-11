@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'java11' // Must match the name in Jenkins
-        maven 'myMaven'
-        docker 'myDocker'
-    }
     environment {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
@@ -13,6 +8,12 @@ pipeline {
         //JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64"
     }
     
+    tools {
+        jdk 'java11' // Must match the name in Jenkins
+        maven 'myMaven'
+        docker 'myDocker'
+    }
+       
 
     stages {
        /* stage('Checkout') {
