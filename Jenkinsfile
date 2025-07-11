@@ -15,11 +15,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'java --version'
-                sh 'mvn --version'
+                sh 'java --version
+                    ls -l /usr/lib/jvm/'
+                    export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64'
+                    java --version
+                    mvn --version'
                 sh 'docker --version'
                 sh 'whoami'
-                sh 'echo $PATH'
+                sh 'echo $PATH'                
                 sh 'mvn clean install -DskipTests' // Skip tests temporarily to isolate build issues
                 echo "Build completed - BUILD_NUMBER: $env.BUILD_NUMBER"
                 echo "Job: $env.JOB_NAME, Tag: $env.BUILD_TAG"
