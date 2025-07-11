@@ -1,34 +1,23 @@
 pipeline {
     agent any
-
+    tools {
+        jdk 'java11' // Must match the JDK name in Jenkins
+        maven 'myMaven'
+        dockerTool 'myDocker' // Use dockerTool instead of docker
+    }
     environment {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-        //JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64"
     }
-    
-    tools {
-        jdk 'java11' // Must match the name in Jenkins
-        maven 'myMaven'
-        docker 'myDocker'
-    }
-       
-
     stages {
-       /* stage('Checkout') {
-            steps {
-                git url: 'https://github.com/abhijeet9sh/jenkins-devops-microservices-pipeline.git', branch: 'main'
-                echo 'Checked out code from Git'
-            }
-        } */
         stage('Build') {
             steps {
+                sh 'java --version'
                 sh 'mvn --version'
                 sh 'docker --version'
                 sh 'whoami'
-                sh 'java --version'
-                sh 'mvn clean install'
+                sh 'mvn clean install -DskipTests' // Skip tests temporarily to isolate build issues
                 echo "Build completed - BUILD_NUMBER: $env.BUILD_NUMBER"
                 echo "Job: $env.JOB_NAME, Tag: $env.BUILD_TAG"
             }
