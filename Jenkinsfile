@@ -4,6 +4,7 @@ pipeline {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64"
     }
     stages {
        /* stage('Checkout') {
