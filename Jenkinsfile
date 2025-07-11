@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'docker --version'
+                sh 'java --version'
                 sh 'mvn clean install'
                 echo "Build completed - BUILD_NUMBER: $env.BUILD_NUMBER"
                 echo "Job: $env.JOB_NAME, Tag: $env.BUILD_TAG"
