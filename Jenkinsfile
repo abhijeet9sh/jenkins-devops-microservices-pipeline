@@ -15,12 +15,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "
+                sh '
                     java --version
                     ls -l /usr/lib/jvm/
                     export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
                     java --version
-                    mvn --version "
+                    mvn --version '
                 sh 'docker --version'
                 sh 'whoami'
                 sh 'echo $PATH'                
