@@ -8,7 +8,9 @@ pipeline {
     environment {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        JAVA_HOME = tool 'java11'
+        #PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        PATH = "$JAVA_HOME/bin:$dockerHome/bin:$mavenHome/bin:$PATH"
     }
     stages {
         stage('Build') {
@@ -17,6 +19,7 @@ pipeline {
                 sh 'mvn --version'
                 sh 'docker --version'
                 sh 'whoami'
+                sh 'echo $PATH'
                 sh 'mvn clean install -DskipTests' // Skip tests temporarily to isolate build issues
                 echo "Build completed - BUILD_NUMBER: $env.BUILD_NUMBER"
                 echo "Job: $env.JOB_NAME, Tag: $env.BUILD_TAG"
