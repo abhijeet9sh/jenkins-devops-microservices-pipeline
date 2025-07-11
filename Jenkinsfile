@@ -1,11 +1,19 @@
 pipeline {
     agent any
+
+    tools {
+        jdk 'java11' // Must match the name in Jenkins
+        maven 'myMaven'
+        docker 'myDocker'
+    }
     environment {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
         //JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64"
     }
+    
+
     stages {
        /* stage('Checkout') {
             steps {
@@ -17,6 +25,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'docker --version'
+                sh 'whoami'
                 sh 'java --version'
                 sh 'mvn clean install'
                 echo "Build completed - BUILD_NUMBER: $env.BUILD_NUMBER"
