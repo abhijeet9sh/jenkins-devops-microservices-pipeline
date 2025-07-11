@@ -9,7 +9,7 @@ pipeline {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
         JAVA_HOME = tool 'java11'
-        #PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        //PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
         PATH = "$JAVA_HOME/bin:$dockerHome/bin:$mavenHome/bin:$PATH"
     }
     stages {
