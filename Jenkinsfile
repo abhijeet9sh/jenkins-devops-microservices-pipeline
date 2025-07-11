@@ -6,12 +6,12 @@ pipeline {
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
     stages {
-        stage('Checkout') {
+       /* stage('Checkout') {
             steps {
                 git url: 'https://github.com/abhijeet9sh/jenkins-devops-microservices-pipeline.git', branch: 'main'
                 echo 'Checked out code from Git'
             }
-        }
+        } */
         stage('Build') {
             steps {
                 sh 'mvn --version'
